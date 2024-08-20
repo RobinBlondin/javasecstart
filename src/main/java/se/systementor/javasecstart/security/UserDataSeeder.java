@@ -24,7 +24,7 @@ public class UserDataSeeder {
         if (roleRepo.findByName("Admin") == null) {
             addRole("Admin");
         }
-        if (roleRepo.findByName("Reception") == null) {
+        if (roleRepo.findByName("Client") == null) {
             addRole("Client");
         }
         if(userRepo.getUserByEmail("admin@koriander.se") == null){
