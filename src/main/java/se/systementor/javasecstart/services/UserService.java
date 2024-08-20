@@ -1,7 +1,5 @@
 package se.systementor.javasecstart.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.systementor.javasecstart.DTO.UserDTO;
@@ -9,7 +7,7 @@ import se.systementor.javasecstart.model.User;
 import se.systementor.javasecstart.model.UserRepository;
 
 @Service
-public class userService {
+public class UserService {
 
     UserRepository userRepository;
 
