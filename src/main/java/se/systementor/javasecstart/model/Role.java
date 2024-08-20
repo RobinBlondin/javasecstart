@@ -1,0 +1,22 @@
+package se.systementor.javasecstart.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private String name;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    List<User> users;
+}

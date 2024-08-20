@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sv"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registreringsformulär</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+
+<form id= "form" action="/registerAccount" th:object="${newUser}" method="post">
+    <h2>Registrera ett konto</h2>
+    <label for="name">Användarnamn:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required pattern="[A-Öa-ö]+"
+    title="Please enter letters only for First Name"><br><br>
+
+    <label for="email">E-postadress:</label>
+    <input type="email" id="email" name="email" th:field="*{email}" required>
+
+    <label for="password">Lösenord:</label>
+    <input type="password" id="password" name="password" th:field="*{password}" required min="10" max="1000">
+
+    <label for="phone">Telefonnummer:</label>
+    <input type="tel" id="phone" name="phone" th:field="*{phone}" required pattern="[0-9]{0,10}"
+           title="Please enter a 10-digit Phone number"><br><br>
+
+    <input type="submit" value="Registrera">
+</form>
+
+</body>
+</html>
