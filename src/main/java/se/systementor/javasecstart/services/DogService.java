@@ -15,4 +15,12 @@ public class DogService {
     public List<Dog> getPublicDogs(){
         return dogRepository.findAllBySoldToIsNull();
     }
+
+    public Dog getDogById(Long id) {
+        return dogRepository.findById(id).orElse(null);
+    }
+
+    public void saveDog(Dog dog) {
+        dogRepository.save(dog);
+    }
 }
