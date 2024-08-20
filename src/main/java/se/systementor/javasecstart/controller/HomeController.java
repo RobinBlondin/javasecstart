@@ -15,6 +15,11 @@ public class HomeController {
 //        model.addAttribute("dogs", dogRepository.findAll());
         return "home";
     }
+    @GetMapping("/registerAccount")
+    String registerAccount(){
+        return "registerAccount";
+    }
+
 
 }
 
