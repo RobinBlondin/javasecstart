@@ -1,6 +1,8 @@
 package se.systementor.javasecstart.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.systementor.javasecstart.DTO.UserDTO;
 import se.systementor.javasecstart.model.User;
@@ -17,7 +19,7 @@ public class userService {
                 .name(dto.getName())
                 .phone(dto.getPhone())
                 .email(dto.getEmail())
-                .password(dto.getPassword()).build();
+                .password(hashPassword(dto.getPassword())).build();
     }
 
     public UserDTO userToDto (User user){
@@ -25,7 +27,12 @@ public class userService {
                 .id(user.getId())
                 .name(user.getName())
                 .phone(user.getPhone())
-                .email(user.getEmail()).build();
+                .email(user.getEmail())
+                .password(user.getPassword()).build();
+    }
+
+    public String hashPassword (String password){
+     return new BCryptPasswordEncoder().encode(password);
     }
 
 }
