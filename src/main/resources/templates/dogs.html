@@ -50,36 +50,37 @@
         <input type="text" name="q" value="" />
         <!-- <input type="hidden" name="sortCol"  value="<?php echo $sortCol; ?>" />       -->
     </form>
-
-    <thead>
-    <tr class="tabulator-row">
-        <th class="tabulator-cell">
-            Name
-            <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-            <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-        </th>
-
-        <th >
-            Breed
-            <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-            <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-        </th>
-        <th>Age
-            <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-            <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-        </th>
-        <th>Size
-            <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-            <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-        </th>
-        <th>Price
-            <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-            <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-
+    <table class="tabulator-table">
+        <thead>
+            <tr class="tabulator-row">
+                <th class="tabulator-cell">
+                    Name
+                    <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Breed
+                    <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Age
+                    <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Size
+                    <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Price
+                    <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+            </tr>
+        </thead>
+    </table>
     <div class="cards dogcards">
         <div class="card dogcard" th:each="dog: ${dogs}">
             <div class="card-top-info">
