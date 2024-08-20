@@ -21,7 +21,12 @@
 
   <div>
     <label for="age">Age:</label>
-    <input type="text" id="age" th:field="*{age}">
+    <select id="age" th:field="*{age}">
+      <option value="Puppy" th:selected="*{size == 'puppy'}">Puppy</option>
+      <option value="Young" th:selected="*{size == 'young'}">Young</option>
+      <option value="Adult" th:selected="*{size == 'adult'}">Adult</option>
+      <option value="Senior" th:selected="*{size == 'senior'}">Senior</option>
+    </select>
   </div>
   <br>
 
