@@ -6,8 +6,10 @@
       data-theme="light">
 
 
+
 <th:block layout:fragment="extraHead">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.css">
+    <link rel="stylesheet" href="/css/pagination.css">
     <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.js"></script>
     <script src="/js/modal.js"></script>
 
@@ -51,8 +53,9 @@
     </a>
     <br/><br/>
     <form method="GET">
-        Search:
-        <input type="text" name="searchTerm" th:value="${searchTerm}" />
+
+        <label for="searchDogs">Search:</label>
+        <input type="text" id="searchDogs" name="searchTerm" th:value="${searchTerm}" />
     </form>
     <table class="tabulator-table">
         <thead>
@@ -100,6 +103,15 @@
 
         </tbody>
     </table>
+
+    <ul class="pagination" id="pager">
+        <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <li th:if="${pageNo == i}" class="page-item active" th:text="${i}"></li>
+            <li th:if="${pageNo != i}" class="page-item">
+                <a class="page-link" th:href="@{|?searchTerm=${searchTerm}&pageNo=${i}|}" th:text="${i}"></a>
+            </li>
+        </th:block>
+    </ul>
 
 </div>
 </html>
