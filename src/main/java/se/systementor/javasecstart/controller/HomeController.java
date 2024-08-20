@@ -1,6 +1,7 @@
 package se.systementor.javasecstart.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -43,18 +44,29 @@ public class HomeController {
         model.addAttribute("searchTerm", searchTerm);
 
         Sort sort = Sort.by(Sort.Direction.fromString(sortOrder), sortCol);
-//        Pageable pageable = PageRequest.of(pageNo-1, pageSize, sort);
+        Pageable pageable = PageRequest.of(pageNo-1, pageSize, sort);
 
+        Page<Dog> dogPage;
         if (!searchTerm.isEmpty()) {
-            model.addAttribute("dogs", dogRepository.findAllByNameContainsOrBreedContains(searchTerm, searchTerm, sort));
-            model.addAttribute("totalPages", 1);
-            model.addAttribute("pageNo", 1);
+            dogPage = dogRepository.findAllByNameContainsOrBreedContains(searchTerm, searchTerm, pageable);
         } else {
-            List<Dog> page = dogRepository.findAll(sort);
-            model.addAttribute("pageNo", pageNo);
-            model.addAttribute("totalPages", 1);
-            model.addAttribute("dogs", page);
+            dogPage = dogRepository.findAll(pageable);
         }
+
+        model.addAttribute("dogs", dogPage.getContent());
+        model.addAttribute("totalPages", dogPage.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+
+//        if (!searchTerm.isEmpty()) {
+//            model.addAttribute("dogs", dogRepository.findAllByNameContainsOrBreedContains(searchTerm, searchTerm, pageable));
+////            model.addAttribute("totalPages", 1);
+////            model.addAttribute("pageNo", 1);
+//        } else {
+//            model.addAttribute("dogs", dogRepository.findAll(pageable).getContent());
+////            model.addAttribute("pageNo", pageNo);
+////            model.addAttribute("totalPages", 1);
+////            model.addAttribute("dogs", page);
+//        }
         return "home";
     }
 
