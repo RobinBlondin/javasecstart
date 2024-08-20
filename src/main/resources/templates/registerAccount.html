@@ -48,7 +48,8 @@
 </head>
 <body>
 
-<form action="/register" method="post">
+
+<form id= "form" action="/register" th:object="${newUser}" method="post">
     <h2>Registrera ett konto</h2>
     <label for="username">Användarnamn:</label>
     <input type="text" id="username" name="username" required>
@@ -58,6 +59,9 @@
 
     <label for="password">Lösenord:</label>
     <input type="password" id="password" name="password" required>
+
+    <label for="phone">Lösenord:</label>
+    <input type="tel" id="phone" name="phone" required>
 
     <input type="submit" value="Registrera">
 </form>
