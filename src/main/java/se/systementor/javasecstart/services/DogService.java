@@ -6,6 +6,7 @@ import se.systementor.javasecstart.model.Dog;
 import se.systementor.javasecstart.model.DogRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class DogService {
@@ -16,8 +17,8 @@ public class DogService {
         return dogRepository.findAllBySoldToIsNull();
     }
 
-    public Dog getDogById(Long id) {
-        return dogRepository.findById(id).orElse(null);
+    public Dog getDogById(UUID id) {
+        return dogRepository.findById(id);
     }
 
     public void saveDog(Dog dog) {

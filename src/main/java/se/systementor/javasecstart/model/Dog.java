@@ -2,13 +2,15 @@ package se.systementor.javasecstart.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name="Dog")
 public class Dog {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.UUID)
     @Column(name="Id")
-    private int id;
+    private UUID id;
 
     @Column(name="Age")
     private String age;
@@ -37,11 +39,11 @@ public class Dog {
     private String image;
 
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

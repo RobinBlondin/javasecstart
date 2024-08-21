@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import se.systementor.javasecstart.model.Dog;
 import se.systementor.javasecstart.services.DogService;
 
+import java.util.UUID;
+
 @Controller
 public class AdminDogController {
     @Autowired
@@ -27,7 +29,7 @@ public class AdminDogController {
     }
 
     @GetMapping("/admin/dogs/edit/{id}")
-    public String editDog(@PathVariable("id") Long id, Model model) {
+    public String editDog(@PathVariable("id") UUID id, Model model) {
         Dog dog = dogService.getDogById(id);
         model.addAttribute("dog", dog);
         return "/admin/dogs/edit";
