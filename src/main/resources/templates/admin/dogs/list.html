@@ -6,8 +6,10 @@
       data-theme="light">
 
 
+
 <th:block layout:fragment="extraHead">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.css">
+    <link rel="stylesheet" href="/css/pagination.css">
     <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.js"></script>
     <script src="/js/modal.js"></script>
 
@@ -51,38 +53,39 @@
     </a>
     <br/><br/>
     <form method="GET">
-        Search:
-        <input type="text" name="q" value="" />
+
+        <label for="searchDogs">Search:</label>
+        <input type="text" id="searchDogs" name="searchTerm" th:value="${searchTerm}" />
     </form>
     <table class="tabulator-table">
         <thead>
-        <tr class="tabulator-row">
-            <th class="tabulator-cell">
-                Name
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-            </th>
-
-            <th >
-                Breed
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-            </th>
-            <th>Age
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-            </th>
-            <th>Size
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-            </th>
-            <th>Price
-                <a href="?"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                <a href="?"><i class="fa-solid fa-arrow-down-z-a"></i></a>
-            </th>
-            <th></th>
-        </tr>
-
+            <tr class="tabulator-row">
+                <th class="tabulator-cell">
+                    Name
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=name&sortOrder=asc|}"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=name&sortOrder=desc|}"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Breed
+                    <a href="?sortCol=breed&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=breed&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Age
+                    <a href="?sortCol=age&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=age&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Size
+                    <a href="?sortCol=size&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=size&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Price
+                    <a href="?sortCol=price&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=price&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+            </tr>
         </thead>
         <tbody id="tablerows">
         <tr th:each="dog: ${dogs}">
@@ -99,11 +102,14 @@
         </tbody>
     </table>
 
+    <ul class="pagination" id="pager">
+        <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <li th:if="${pageNo == i}" class="page-item active" th:text="${i}"></li>
+            <li th:if="${pageNo != i}" class="page-item">
+                <a class="page-link" th:href="@{|?searchTerm=${searchTerm}&pageNo=${i}|}" th:text="${i}"></a>
+            </li>
+        </th:block>
+    </ul>
+
 </div>
-
-
-
-
-
-s
 </html>

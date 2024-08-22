@@ -8,25 +8,12 @@
 
 <th:block layout:fragment="extraHead">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.css">
+    <link rel="stylesheet" href="/css/pagination.css">
     <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@1.5.0/event-calendar.min.js"></script>
     <script src="/js/modal.js"></script>
 
 </th:block>
 
-<!--    <header>-->
-<!--        <div class="content">-->
-<!--            <div class="btn-left">-->
-<!--                <button class="btn btn-blue">-->
-<!--                    <span class="fas fa-plus mr-2"></span>-->
-<!--                    New Task-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <div class="btn-right">-->
-<!--                <button class="btn btn-sec left-radius">Share</button>-->
-<!--                <button class="btn btn-sec right-radius">Export</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </header>    -->
 <div layout:fragment="mainContent">
 
     <div class="row-box">
@@ -46,10 +33,42 @@
     </div>
 
     <form method="GET">
-        Search:
-        <input type="text" name="q" value="" />
+        <label for="searchDogs">Search:</label>
+        <input type="text" id="searchDogs" name="searchTerm" th:value="${searchTerm}" />
+<!--        <input type="text" name="q" value="" />-->
         <!-- <input type="hidden" name="sortCol"  value="<?php echo $sortCol; ?>" />       -->
     </form>
+    <table class="tabulator-table">
+        <thead>
+            <tr class="tabulator-row">
+                <th class="tabulator-cell">
+                    Name
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=name&sortOrder=asc|}"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=name&sortOrder=desc|}"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Breed
+                    <a href="?sortCol=breed&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=breed&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Age
+                    <a href="?sortCol=age&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=age&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Size
+                    <a href="?sortCol=size&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=size&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+                <th>
+                    Price
+                    <a href="?sortCol=price&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a href="?sortCol=price&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                </th>
+            </tr>
+        </thead>
+    </table>
     <div class="cards dogcards">
         <div class="card dogcard" th:each="dog: ${dogs}">
             <div class="card-top-info">
@@ -66,6 +85,15 @@
             </p>
         </div>
     </div>
+
+    <ul class="pagination" id="pager">
+        <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <li th:if="${pageNo == i}" class="page-item active" th:text="${i}"></li>
+            <li th:if="${pageNo != i}" class="page-item">
+                <a class="page-link" th:href="@{|?searchTerm=${searchTerm}&pageNo=${i}|}" th:text="${i}"></a>
+            </li>
+        </th:block>
+    </ul>
 
 </div>
 
