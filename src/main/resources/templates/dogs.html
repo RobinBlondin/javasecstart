@@ -48,23 +48,23 @@
                 </th>
                 <th>
                     Breed
-                    <a href="?sortCol=breed&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                    <a href="?sortCol=breed&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=breed&sortOrder=asc|}"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=breed&sortOrder=desc|}"><i class="fa-solid fa-arrow-down-z-a"></i></a>
                 </th>
                 <th>
                     Age
-                    <a href="?sortCol=age&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                    <a href="?sortCol=age&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=age&sortOrder=asc|}"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=age&sortOrder=desc|}"><i class="fa-solid fa-arrow-down-z-a"></i></a>
                 </th>
                 <th>
                     Size
-                    <a href="?sortCol=size&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                    <a href="?sortCol=size&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=size&sortOrder=asc|}"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=size&sortOrder=desc|}"><i class="fa-solid fa-arrow-down-z-a"></i></a>
                 </th>
                 <th>
                     Price
-                    <a href="?sortCol=price&sortOrder=asc"><i class="fa-solid fa-arrow-up-a-z"></i></a>
-                    <a href="?sortCol=price&sortOrder=desc"><i class="fa-solid fa-arrow-down-z-a"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=price&sortOrder=asc|}"><i class="fa-solid fa-arrow-up-a-z"></i></a>
+                    <a th:href="@{|?searchTerm=${searchTerm}&sortCol=price&sortOrder=desc|}"><i class="fa-solid fa-arrow-down-z-a"></i></a>
                 </th>
             </tr>
         </thead>
