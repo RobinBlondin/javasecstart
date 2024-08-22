@@ -1,5 +1,6 @@
 package se.systementor.javasecstart.services;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.systementor.javasecstart.DTO.UserDTO;
@@ -16,7 +17,7 @@ public class UserService {
                 .id(dto.getId())
                 .name(dto.getName())
                 .phone(dto.getPhone())
-                .email(dto.getEmail())
+                .username(dto.getEmail())
                 .password(hashPassword(dto.getPassword())).build();
     }
 
@@ -25,12 +26,19 @@ public class UserService {
                 .id(user.getId())
                 .name(user.getName())
                 .phone(user.getPhone())
-                .email(user.getEmail())
+                .email(user.getUsername())
                 .password(user.getPassword()).build();
     }
 
     public String hashPassword (String password){
      return new BCryptPasswordEncoder().encode(password);
+    }
+
+    public Boolean checkValidateUser (String user ,String password){
+        User user1 = userRepository.getUserByUsername(user);
+        if(user1 == null)throw new UsernameNotFoundException("User not found");
+        String hashedPassword = hashPassword(password);
+        return hashedPassword.equals(user1.getPassword());
     }
 
 }

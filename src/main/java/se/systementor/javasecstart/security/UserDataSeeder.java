@@ -20,6 +20,7 @@ public class UserDataSeeder {
     @Autowired
     RoleRepository roleRepo;
 
+
     public void Seed(){
         if (roleRepo.findByName("Admin") == null) {
             addRole("Admin");
@@ -27,10 +28,10 @@ public class UserDataSeeder {
         if (roleRepo.findByName("Client") == null) {
             addRole("Client");
         }
-        if(userRepo.getUserByEmail("admin@koriander.se") == null){
+        if(userRepo.getUserByUsername("admin@doggo.se") == null){
             addUser("admin@doggo.se","Admin");
         }
-        if(userRepo.getUserByEmail("reception@koriander.se") == null){
+        if(userRepo.getUserByUsername("client@doggo.se") == null){
             addUser("client@doggo.se","Client");
         }
     }
@@ -44,8 +45,8 @@ public class UserDataSeeder {
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String hash = encoder.encode("Hejsan123");
-        User user = User.builder().password(hash).name(mail).roles(roles).build();
+        String hash = encoder.encode("123");
+        User user = User.builder().password(hash).username(mail).roles(roles).build();
         userRepo.save(user);
     }
 

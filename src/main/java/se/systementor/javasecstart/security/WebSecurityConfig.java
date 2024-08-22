@@ -2,30 +2,58 @@ package se.systementor.javasecstart.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import se.systementor.javasecstart.services.UserDetailsServiceIMPL;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class WebSecurityConfig {
+public class WebSecurityConfig{
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceIMPL();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/","/css/**", "/js/**","/images/**", "/public**", "/dogs","/registerAccount", "/admin/**", "/admin/dogs/edit/**")
+        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/public**",
+                                "/dogs",
+                                "/registerAccount")
                 .permitAll().requestMatchers("/users")
                 .hasAuthority("Admin").anyRequest().authenticated()
 
         )
                 .formLogin(formLogin -> formLogin
-                       //.loginPage("/login")
-                        //.loginProcessingUrl("/login")
+                        .loginPage("/logins")
                         .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error=true")
+                        .failureUrl("/logins?error=true")
                         .permitAll()
                 )
                 .logout(logout ->
@@ -42,7 +70,9 @@ public class WebSecurityConfig {
     }
 
 
-
-
     }
+
+
+
+
 

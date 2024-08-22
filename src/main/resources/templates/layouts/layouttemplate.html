@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      xmlns:sec="http://www.w3.org/1999/xhtml" lang="">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -42,20 +44,31 @@
                 <!--                    </form>-->
                 <!--                </div>-->
 
-                <div sec:authorize="isAnonymous()" class="user-image">
+                <div class="user-image">
                     <img src="/images/blank-profile-picture.png" alt="Not logged in">
                 </div>
-                <div sec:authorize="isAnonymous()" class="user-info">
+                <div class="user-info">
                     <h2>Konto</h2>
-                    <a href="/scheduleadmin">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Logga in
-                    </a>
 
-                    <a href="/registerAccount">
+                    <div class="auth-button">
+                        <div sec:authorize="isAnonymous()">
+                            <a href="/logins">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Logga in
+                            </a>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <a href="/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logga ut
+                            </a>
+                        </div>
+                    </div>
+
+                    <!--<a href="/registerAccount">
                         <i class="fas fa-sign-out-alt"></i>
                         Register account
-                    </a>
+                    </a>-->
                 </div>
 
             </div>
