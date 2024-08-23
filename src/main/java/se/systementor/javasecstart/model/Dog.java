@@ -13,19 +13,19 @@ public class Dog {
     @Column(name="Id")
     private UUID id;
 
-    @Pattern(regexp="[a-zA-Z]{1,30}", message="Age must be only letters and 1-30 characters long")
+    @Pattern(regexp="[a-zA-Z ]{1,30}", message="Age must be only letters and 1-30 characters long")
     @Column(name="Age")
     private String age;
 
-    @Pattern(regexp="[a-zA-Z]{1,30}", message="Gender must be only letters and 1-30 characters long")
+    @Pattern(regexp="[a-zA-Z ]{1,30}", message="Gender must be only letters and 1-30 characters long")
     @Column(name="Gender")
     private String gender;
 
-    @Pattern(regexp="[a-zA-Z]{1,30}", message="Breed must be only letters and 1-30 characters long")
+    @Pattern(regexp="[a-zA-Z ]{1,30}", message="Breed must be only letters and 1-30 characters long")
     @Column(name = "Breed")
     private String breed;
 
-    @Pattern(regexp="[a-zA-Z\\s-]{1,30}", message="SoldTo must be only letters, spaces, or dashes and 1-30 characters long")
+    @Pattern(regexp="[a-zA-Z\\s- ]{1,30}", message="SoldTo must be only letters, spaces, or dashes and 1-30 characters long")
     @Column(name="SoldTo")
     private String soldTo;
 
@@ -34,11 +34,11 @@ public class Dog {
     @Column(name="Price")
     private int price;
 
-    @Pattern(regexp="[a-zA-Z]{1,30}", message="Name must be only letters and 1-30 characters long")
+    @Pattern(regexp="[a-zA-Z ]{1,30}", message="Name must be only letters and 1-30 characters long")
     @Column(name="Name")
     private String name;
 
-    @Pattern(regexp="[a-zA-Z]{1,30}", message="Size must be only letters and 1-30 characters long")
+    @Pattern(regexp="[a-zA-Z ]{1,30}", message="Size must be only letters and 1-30 characters long")
     @Column(name="Size")
     private String size;
 
