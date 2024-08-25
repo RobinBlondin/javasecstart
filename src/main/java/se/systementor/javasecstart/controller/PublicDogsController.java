@@ -1,5 +1,6 @@
 package se.systementor.javasecstart.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +10,9 @@ import se.systementor.javasecstart.model.DogRepository;
 import se.systementor.javasecstart.services.DogService;
 
 @Controller
+@RequiredArgsConstructor
 public class PublicDogsController {
-
-    @Autowired
-    private DogRepository dogRepository;
-
-    @Autowired
-    private DogService dogService;
+    private final DogService dogService;
 
     @GetMapping(path="/dogs")
     String list(Model model,
