@@ -7,8 +7,8 @@ import se.systementor.javasecstart.model.Role;
 import se.systementor.javasecstart.model.RoleRepository;
 import se.systementor.javasecstart.model.User;
 import se.systementor.javasecstart.model.UserRepository;
-
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -38,15 +38,13 @@ public class UserDataSeeder {
 
     private void addUser(String mail, String group) {
         Set<Role> roles = new HashSet<>();
-        Role role = roleRepo.findByName(group);
+        Optional<Role> role = roleRepo.findByName(group);
 
-        if(role != null) {
-            roles.add(role);
-        }
+        role.ifPresent(roles::add);
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String hash = encoder.encode("123");
-        User user = User.builder().password(hash).username(mail).roles(roles).build();
+        User user = User.builder().password(hash).enabled(true).username(mail).roles(roles).build();
         userRepo.save(user);
     }
 
