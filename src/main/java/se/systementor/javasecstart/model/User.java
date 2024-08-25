@@ -8,16 +8,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Data
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -43,4 +44,56 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "roles_id")
     )
     private Set<Role> roles;
+
+    private boolean enabled;
+
+    public User() {
+        this.name = null;
+        this.username = null;
+        this.password = null;
+        this.phone = null;
+        this.enabled = false;
+        this.roles = new HashSet<>();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : this.roles) {
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
+            authorities.add(authority);
+        }
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
 }
