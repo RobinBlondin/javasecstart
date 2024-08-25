@@ -15,8 +15,6 @@ import java.util.UUID;
 public class AdminDogController {
 
     private final DogService dogService;
-    private final DogRepository dogRepository;
-
 
     @GetMapping(path="/admin/dogs")
     String list(Model model,
