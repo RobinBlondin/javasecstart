@@ -98,15 +98,15 @@
 
         <label for="email">E-postadress:</label>
         <input type="email" id="email" name="email" placeholder="E-postadress" th:field="*{email}" minLength="4"
-               maxLength="100" required><br>
+               maxLength="100" required th:style="${message.contains('email')}? 'border-color: red; border-width: 2px;'"><br>
 
         <label for="password">Lösenord:</label>
         <input type="password" id="password" name="password" placeholder="Lösenord" required
-               minLength="10" maxLength="1000"><br>
+               minLength="10" maxLength="1000" th:style="${message.contains('match')}? 'border-color: red; border-width: 2px;'"><br>
 
         <label for="confirm-password">Bekräfta lösenord:</label>
         <input type="password" id="confirm-password" name="confirmPassword" placeholder="Bekräfta lösenord"
-               required minLength="8" maxLength="1000"><br>
+               required minLength="8" th:style="${message.contains('match')}? 'border-color: red; border-width: 2px;'" maxLength="1000"><br>
 
         <label for="phone">Telefonnummer:</label>
         <input type="tel" id="phone" name="phone" placeholder="Telefonnummer" th:field="*{phone}" required
