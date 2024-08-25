@@ -41,13 +41,13 @@ public class UserService {
     public String registrationProcess(UserDTO userDTO, RedirectAttributes rda) throws MessagingException {
         Optional<User> user = userRepository.getUserByUsername(userDTO.getEmail());
         if(user.isPresent()) {
-            rda.addFlashAttribute("newUSer", userDTO);
-            rda.addFlashAttribute("message", "Användare med denna email-adress finns redan i systemet");
+            rda.addFlashAttribute("newUser", userDTO);
+            rda.addFlashAttribute("message", "Denna email är redan registrerad hos oss");
             return "redirect:/registerAccount";
         }
 
         if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
-            rda.addFlashAttribute("newUSer", userDTO);
+            rda.addFlashAttribute("newUser", userDTO);
             rda.addFlashAttribute("message", "Lösenorden matchar inte");
             return "redirect:/registerAccount";
         }
@@ -107,10 +107,10 @@ public class UserService {
         }
 
         User user = token.get().getUser();
-        if(token.get().isExpired()){
-            userRepository.delete(user);
+        if(token.get().isExpired()){;
             tokenRepository.delete(token.get());
-            rda.addFlashAttribute("message", "Token har utgått. Registrera dig igen");
+            userRepository.delete(user);
+            rda.addFlashAttribute("message", "Verifieringsperioden har utgått. Registrera dig igen");
             return "redirect:/login";
         }
 
