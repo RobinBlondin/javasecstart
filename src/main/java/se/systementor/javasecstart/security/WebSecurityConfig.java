@@ -46,7 +46,7 @@ public class WebSecurityConfig{
                                 "/public**",
                                 "/dogs",
                                 "/registerAccount")
-                .permitAll().requestMatchers("/users")
+                .permitAll().requestMatchers("/admin/**")
                 .hasAuthority("Admin").anyRequest().authenticated()
 
         )
