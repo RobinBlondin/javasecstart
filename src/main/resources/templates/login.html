@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             background: linear-gradient(to right, #6a11cb, #2575fc);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -68,14 +69,31 @@
         .login-container p a:hover {
             text-decoration: underline;
         }
+
+        .message-container {
+            background-color: #b3d0bf;
+            color: #5ba867;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            box-shadow: #1a1a1a 0 0 10px;
+        }
     </style>
 </head>
 <body>
+<th:block th:if="${message} != ''">
+    <div class="message-container">
+        <p th:text="${message}"></p>
+    </div>
+</th:block>
 <div class="login-container">
     <h2>Logga in</h2>
-    <form action="/logins" method="post">
-        <input type="text" name="username" placeholder="E-postadress" required>
-        <input type="password" name="password" placeholder="Lösenord" required>
+    <form action="/login" method="post">
+        <label for="username"></label>
+        <input type="text" id="username" name="username" placeholder="E-postadress" required>
+        <label for="password"></label>
+        <input type="password" id="password" name="password" placeholder="Lösenord" required>
         <input type="submit" value="Logga in">
     </form>
     <p>Har du inget konto? <a href="/registerAccount">Registrera dig här</a></p>

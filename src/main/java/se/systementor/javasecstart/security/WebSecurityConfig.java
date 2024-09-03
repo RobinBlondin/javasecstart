@@ -39,21 +39,24 @@ public class WebSecurityConfig{
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/",
+        http
+
+                .authorizeHttpRequests((requests) -> requests.requestMatchers("/",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",
                                 "/public**",
                                 "/dogs",
-                                "/registerAccount")
-                .permitAll().requestMatchers("/admin/**")
+                                "/registerAccount",
+                                "/verify/**")
+                .permitAll().requestMatchers("/users")
                 .hasAuthority("Admin").anyRequest().authenticated()
 
         )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/logins")
+                        .loginPage("/login")
                         .defaultSuccessUrl("/", true)
-                        .failureUrl("/logins?error=true")
+                        .failureUrl("/login?error=true")
                         .permitAll()
                 )
                 .logout(logout ->
