@@ -1,6 +1,6 @@
 package se.systementor.javasecstart;
 
-import lombok.AllArgsConstructor;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +11,7 @@ import se.systementor.javasecstart.security.UserDataSeeder;
 @SpringBootApplication
 public class JavasecstartApplication {
 
+
     @Autowired
     UserDataSeeder userDataSeeder;
     public static void main(String[] args) {
@@ -19,6 +20,9 @@ public class JavasecstartApplication {
 
     @Bean
     CommandLineRunner commandLineRunner() {
+        Dotenv dotenv = Dotenv.load();
+        dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+
         return args -> {
             userDataSeeder.Seed();
         };
